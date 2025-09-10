@@ -3,6 +3,8 @@ import Navbar from "./components/navbar"
 import Home from "./pages/Home"
 import Login from "./pages/Login"
 import Signup from "./pages/Signup"
+import Doctors from "./pages/Doctors"
+import ProtectedRoute from "./components/ProtectedRoute"
 
 function App() {
 
@@ -15,6 +17,14 @@ function App() {
           <Route path="/" element={<Home />}/>
           <Route path="/login" element={<Login />}/>
           <Route path="/Signup" element={<Signup />}/>
+          <Route
+            path="/doctors"
+            element={
+              <ProtectedRoute>
+                <Doctors />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </section>
     </>
