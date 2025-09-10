@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 const Navbar = () => {
   return (
     <nav className="bg-white shadow p-4 rounded flex justify-between items-center">
-      <Link to="/doctors">
+      <Link to="/">
         <Stethoscope className="text-sm mr-2"/>
       </Link>
       <div className="text-sm md:text-base tracking-tighter">

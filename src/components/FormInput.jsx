@@ -9,7 +9,7 @@ const FormInput = ({label, onChange, placeholder, itemName, value, autoComplete,
       value={value}
       onChange={onChange}
       placeholder={placeholder}
-      className="w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-blue-500 outline-none"
+      className="w-full px-4 py-2 border rounded-xl outline-none"
       />
     </div>
   )

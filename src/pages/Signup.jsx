@@ -1,8 +1,18 @@
+import { useState } from "react";
 import FormInput from "../components/FormInput";
+import { Link } from "react-router-dom";
 
 const Signup = () => {
-  const changeHandler = () => {
-    console.log("Change action");
+  const [formState, setFormState] = useState({
+    email:"",
+    password:"",
+    password_confirmation:""
+  })
+  const changeHandler = (e) => {
+    const {name, value} = e.target
+    setFormState((prev)=>({...prev, [name]: value}))
+    console.log(formState);
+    
   }
   const submitHandler = (e) => {
     e.preventDefault();
@@ -16,9 +26,10 @@ const Signup = () => {
         <FormInput
           label="Email"
           type="email"
-          name="email"
+          itemName="email"
           placeholder="Enter your email..."
           autoComplete="email"
+          value={formState.email}
           onChange={changeHandler}
         />
         <FormInput
@@ -27,6 +38,7 @@ const Signup = () => {
           itemName="password"
           placeholder="Enter password"
           autoComplete="new-password"
+          value={formState.password}
           onChange={changeHandler}
         />
 
@@ -36,6 +48,7 @@ const Signup = () => {
           name="password"
           placeholder="Confirm your password"
           autoComplete="new-password"
+          value={formState.password_confirmation}
           onChange={changeHandler}
         />
         <div className="flex items-center justify-center">
@@ -47,6 +60,10 @@ const Signup = () => {
           </button>
         </div>
       </form>
+      <div className="flex flex-col items-center justify-center space-y-2 mt-4">
+        <p>Already registered?</p>
+        <Link to="/login" className="hover:underline hover:text-blue-400">Login</Link>
+      </div>
     </div>
   )
 }
