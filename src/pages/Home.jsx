@@ -15,8 +15,8 @@ const Home = () => {
             and manage doctor records seamlessly.
           </p>
           <div className="flex flex-col md:flex-row gap-10 justify-between">
-            <Link to="/Signup" className="flex items-center justify-center bg-amber-400 hover:bg-amber-500 p-2 rounded cursor-pointer text-white">Get started <ArrowRight /></Link>
-            <Link to="/doctors" className="flex items-center justify-center bg-amber-400 hover:bg-amber-500 p-2 rounded cursor-pointer text-white">Doctors List <ArrowRight /></Link>
+            <Link to="/Signup" className="flex items-center justify-center bg-amber-400 hover:bg-amber-500 hover:ml-2 p-2 rounded cursor-pointer text-white">Get started <ArrowRight /></Link>
+            <Link to="/doctors" className="flex items-center justify-center bg-amber-400 hover:bg-amber-500 hover:mr-2 p-2 rounded cursor-pointer text-white">Doctors List <ArrowRight /></Link>
           </div>
         </div>
         <img src={doctorImg} className="w-full md:w-[30vw] h-[50vh]" alt="doctor illustration" />
