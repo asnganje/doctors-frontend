@@ -1,8 +1,13 @@
 import { useState } from "react";
 import FormInput from "../components/FormInput";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { signUpUser } from "../redux/slices/authSlice";
 
 const Signup = () => {
+  const dispatch = useDispatch()
+  const {loading, error} = useSelector((state)=>state.auth)
+  
   const [formState, setFormState] = useState({
     email:"",
     password:"",
@@ -16,8 +21,7 @@ const Signup = () => {
   }
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log("Submit action");
-    
+    dispatch(signUpUser(formState))
   }
   return(
     <div className="max-w-md mx-auto bg-white p-8 rounded-2xl shadow-lg mt-10">
@@ -45,18 +49,26 @@ const Signup = () => {
         <FormInput
           label="Confirm password"
           type="password"
-          name="password"
+          itemName="password_confirmation"
           placeholder="Confirm your password"
-          autoComplete="new-password"
+          autoComplete="confirm-password"
           value={formState.password_confirmation}
           onChange={changeHandler}
         />
+        {
+          error && (
+            <div className="text-red-500 text-sm mb-2">
+              {Array.isArray(error) ? error.join(", ") : error}
+            </div>
+          )
+        }
         <div className="flex items-center justify-center">
           <button
             type="submit"
             className="w-3/4 bg-amber-400 hover:bg-amber-500 cursor-pointer text-white py-2 rounded-2xl transition"
+            disabled={loading}
           >
-            Sign Up
+            {loading? "Signing Up..." : "Sign Up" }
           </button>
         </div>
       </form>
