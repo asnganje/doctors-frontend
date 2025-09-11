@@ -24,9 +24,10 @@ const authSlice = createSlice({
   error:null,
   },
   reducers: {
-    logout: (state)=> {
-      state.user = null
-      localStorage.removeItem("user")
+    resetAuthState: (state)=> {
+      state.user = null;
+      state.loading = null;
+      state.error = null;
     }
   },
   extraReducers:(builder)=>{
@@ -39,7 +40,6 @@ const authSlice = createSlice({
       state.loading = false
       state.user= action.payload
       state.error = null
-      localStorage.setItem("users", JSON.stringify(action.payload))
     })
     .addCase(signUpUser.rejected, (state, action)=>{
       state.loading = false
@@ -49,5 +49,5 @@ const authSlice = createSlice({
 
   })
 
-  export const {logout} = authSlice.actions
+  export const {resetAuthState} = authSlice.actions
   export default authSlice.reducer
