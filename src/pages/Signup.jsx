@@ -1,13 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FormInput from "../components/FormInput";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { signUpUser } from "../redux/slices/authSlice";
+import { resetAuthState, signUpUser } from "../redux/slices/authSlice";
 
 const Signup = () => {
   const dispatch = useDispatch()
-  const {loading, error} = useSelector((state)=>state.auth)
-  
+  const {loading, error, user } = useSelector((state)=>state.auth)
+  const [successInfo, setSuccessInfo] = useState("")
+  const navigate = useNavigate()  
   const [formState, setFormState] = useState({
     email:"",
     password:"",
@@ -16,15 +17,35 @@ const Signup = () => {
   const changeHandler = (e) => {
     const {name, value} = e.target
     setFormState((prev)=>({...prev, [name]: value}))
-    console.log(formState);
     
   }
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(signUpUser(formState))
   }
+
+  useEffect(()=> {
+    if(user) {
+      setSuccessInfo(`${user.user.email} registration was successful...!`)
+      setFormState({
+        email:"",
+        password:"",
+        password_confirmation:""
+      })
+      const timer = setTimeout(()=> {
+        setSuccessInfo("")
+        dispatch(resetAuthState())
+        navigate("/login")
+      }, 4000)
+      return () => clearTimeout(timer)
+    }
+  }, [user, dispatch, navigate])
+  
   return(
     <div className="max-w-md mx-auto bg-white p-8 rounded-2xl shadow-lg mt-10">
+      {successInfo && <div
+        className="mb-4 rounded-lg text-center py-2 bg-green-100 text-green-700 text-sm font-medium shadow-sm animate-pulse"
+        >{successInfo}</div>}
       <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Sign Up</h2>
       <form onSubmit={submitHandler}>
         <FormInput
