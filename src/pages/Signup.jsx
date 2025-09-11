@@ -26,7 +26,7 @@ const Signup = () => {
 
   useEffect(()=> {
     if(user) {
-      setSuccessInfo(`${user.user.email} registration was successful...!`)
+      setSuccessInfo(`Success, redirecting to login...`)
       setFormState({
         email:"",
         password:"",
