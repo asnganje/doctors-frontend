@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import FormInput from "../components/FormInput";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { resetAuthState, signUpUser } from "../redux/slices/authSlice";
+import { resetAuthState } from "../redux/slices/authSlice";
+import { signUpUser } from "../redux/thunks/authThunks";
 
 const Signup = () => {
   const dispatch = useDispatch()
