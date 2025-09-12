@@ -1,8 +1,17 @@
 import { useState } from "react";
 import FormInput from "../components/FormInput";
 import { Link } from "react-router-dom";
+import { login } from "../redux/thunks/authThunks";
+import { useDispatch, useSelector } from "react-redux";
 
 const Login = () => { 
+  const dispatch = useDispatch()
+  const {user, loading, error} = useSelector((state)=>state.auth)
+  console.log(`User is ${user},
+    Loading: ${loading},
+    Error: ${error}`
+  );
+  
   const [formState, setFormState] = useState({
     email:"",
     password:"",
@@ -10,10 +19,10 @@ const Login = () => {
   const changeHandler = (e) => {
     const {name, value} = e.target
     setFormState((prev)=>({...prev, [name]: value}))
-    
   }
   const submitHandler = (e) => {
     e.preventDefault();
+    dispatch(login(formState))
   }
   
   return(
