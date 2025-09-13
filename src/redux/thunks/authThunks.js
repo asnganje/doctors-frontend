@@ -30,4 +30,20 @@ const login = createAsyncThunk("auth/login",
   }
 )
 
-export {signUpUser, login}
+const logout = createAsyncThunk("auth/logout",
+  async (token, {rejectWithValue}) => {
+    try {
+      const response = await axios.delete(`${API_URL}/sign_out`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      
+      return response.data
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.errors || ['Logout process failed'])
+    }
+  }
+)
+
+export {signUpUser, login, logout}
