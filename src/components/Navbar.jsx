@@ -1,7 +1,21 @@
 import {Stethoscope} from "lucide-react"
-import { Link } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import { Link, useNavigate } from "react-router-dom"
+import { logout } from "../redux/thunks/authThunks"
 
 const Navbar = () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const { user } = useSelector((state)=> state.auth)
+  let token = ""
+  if (user) {
+    token = user.token
+  }  
+  
+  const logoutHandler = () => {
+    dispatch(logout(token))
+    navigate("/")
+  }
   return (
     <nav className="bg-white shadow p-4 rounded flex justify-between items-center">
       <Link to="/">
@@ -10,10 +24,16 @@ const Navbar = () => {
       <div className="text-sm md:text-base tracking-tighter">
         The Doctors plaza!
       </div>
+      { user ?
+        <div className="">
+          <button type="button" onClick={ logoutHandler } className="bg-amber-400 cursor-pointer p-2 rounded hover:bg-amber-500 text-sm md:text-base text-white md:w-[10vw] text-center">Logout</button>
+        </div> 
+        : 
       <div className="flex gap-5">
         <Link to="/signup" className="bg-amber-400 p-2 rounded hover:bg-amber-500 text-sm md:text-base text-white md:w-[10vw] text-center">SignUp</Link>
-        <Link to="/login" className="bg-amber-400 p-2 rounded hover:bg-amber-500 hover:ml-2 text-sm md:text-base text-white md:w-[10vw] text-center">Login</Link>
+        <Link to="/login" className="bg-amber-400 p-2 rounded hover:bg-amber-500 text-sm md:text-base text-white md:w-[10vw] text-center">Login</Link>
       </div>
+      }
     </nav>
   )
 }
