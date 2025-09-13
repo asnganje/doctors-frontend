@@ -20,9 +20,9 @@ function App() {
           <Route
             path="/doctors"
             element={
-              <ProtectedRoute>
+              // <ProtectedRoute>
                 <Doctors />
-              </ProtectedRoute>
+              // </ProtectedRoute>
             }
           />
         </Routes>
