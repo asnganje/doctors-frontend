@@ -1,17 +1,13 @@
 import { useState } from "react";
 import FormInput from "../components/FormInput";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { login } from "../redux/thunks/authThunks";
 import { useDispatch, useSelector } from "react-redux";
 
 const Login = () => { 
   const dispatch = useDispatch()
-  const {user, loading, error} = useSelector((state)=>state.auth)
-  console.log(`User is ${user},
-    Loading: ${loading},
-    Error: ${error}`
-  );
-  
+  const { loading, error} = useSelector((state)=>state.auth)
+  const navigate = useNavigate()
   const [formState, setFormState] = useState({
     email:"",
     password:"",
@@ -23,6 +19,11 @@ const Login = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(login(formState))
+    setFormState({
+      email:"",
+      password:""
+    })
+    navigate("/doctors")
   }
   
   return(
@@ -48,19 +49,19 @@ const Login = () => {
           onChange={changeHandler}
         />
 
-        {/* {
+        {
           error && (
             <div className="text-red-500 text-sm mb-2">
               {Array.isArray(error) ? error.join(", ") : error}
             </div>
           )
-        } */}
+        }
         <div className="flex items-center justify-center">
           <button
             type="submit"
             className="w-3/4 bg-amber-400 hover:bg-amber-500 cursor-pointer text-white py-2 rounded-2xl transition"
           >
-            Login
+            {loading ? "Logging you in..." : "Login"}
           </button>
         </div>
       </form>
