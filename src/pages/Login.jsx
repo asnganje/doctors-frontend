@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Login = () => { 
   const dispatch = useDispatch()
-  const { loading, error} = useSelector((state)=>state.auth)
+  const { user, loading, error} = useSelector((state)=>state.auth)
   const navigate = useNavigate()
   const [formState, setFormState] = useState({
     email:"",
@@ -23,7 +23,9 @@ const Login = () => {
       email:"",
       password:""
     })
-    navigate("/doctors")
+    if (user) {
+      navigate("/doctors")
+    }
   }
   
   return(
