@@ -12,9 +12,13 @@ const Navbar = () => {
     token = user.token
   }  
   
-  const logoutHandler = () => {
-    dispatch(logout(token))
-    navigate("/")
+  const logoutHandler = async () => {
+    try {
+      await dispatch(logout(token)).unwrap()
+      navigate("/")      
+    } catch (error) {
+      console.error("Logout failed:", error )
+    }
   }
   return (
     <nav className="bg-white shadow p-4 rounded flex justify-between items-center">
