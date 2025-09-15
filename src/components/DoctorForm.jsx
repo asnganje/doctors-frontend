@@ -5,13 +5,13 @@ import { addDoctor } from "../redux/thunks/addDoctorThunk"
 
 const DoctorForm = ({onClose}) => {
   const dispatch = useDispatch()
+    const [fileN, setFileN] = useState("")
   const [formData, setFormData] = useState({
     name:"",
     specialization:"",
     biography:"",
     image:null
   })
-
   const specializations = [
     "Cardiology",
     "Dermatology",
@@ -25,27 +25,30 @@ const DoctorForm = ({onClose}) => {
   const changeHandler = (e) => {
     const {name, value, files} = e.target;
     if (name === "image" && files && files[0]) {
-      setFormData((prev)=> ({...prev, image:files[0]}))      
+      setFileN(files[0].name)
+      setFormData((prev)=> ({...prev, image:files[0]}))
     } else {
       setFormData((prev) => ({...prev, [name]:value}))
     }
   }
   
+  
   const submitHandler = (e) => {
     e.preventDefault() 
+    
     const fileInput = document.getElementById("image-upload")
     
     const file = fileInput?.files[0]
-    
-    const payload = {...formData, image: file || formData.image}    
+    const payload = {...formData, image: file || formData.image}  
     
     dispatch(addDoctor(payload))
     onClose()
   }
+  
   return (
     <div>
       <h3 className="text-lg font-semibold mb-4 text-gray-700">Add a Doctor</h3>
-      <form className="space-y-4">
+      <form className="space-y-4" onSubmit={submitHandler}>
         <input
           type="text"
           name="name"
@@ -82,7 +85,7 @@ const DoctorForm = ({onClose}) => {
             htmlFor="image-upload"
             className="flex items-center gap-2 cursor-pointer text-gray-700 w-fit"
           >
-            <Upload className="w-5 h-5 text-blue-500 cursor-point"/>
+            <Upload className="w-5 h-5 text-blue-500 cursor-pointer"/>
             Upload
             <span>Choose file</span>
           </label>
@@ -95,8 +98,8 @@ const DoctorForm = ({onClose}) => {
             className="w-full cursor-pointer hidden"
           />
           {
-            formData.image && (
-              <p className="text-sm text-green-600 mt-1">Selected: {formData.image.name}</p>
+            fileN && (
+              <p className="text-sm text-green-600 mt-1">Selected: {fileN}</p>
             )
           }
         </div>
@@ -110,7 +113,6 @@ const DoctorForm = ({onClose}) => {
           </button>
           <button
             type="submit"
-            onClick={submitHandler}
             className="px-4 py-2 cursor-pointer bg-green-500 hover:bg-green-600 text-white rounded-lg"
           >
             Save Doctor
