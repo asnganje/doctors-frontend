@@ -15,4 +15,15 @@ const fetchDoctors = createAsyncThunk("doctors/fetchDoctors",
   }
 )
 
-export {fetchDoctors}
+const removeDoctor = createAsyncThunk("doctors/removeDoctor",
+  async(docId, {rejectWithValue}) => {
+    try {
+      const response = await axios.delete(`${API_URL}/${docId}`)
+      return response.data
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.error || error.message)
+    }
+  }
+)
+
+export {fetchDoctors, removeDoctor}
