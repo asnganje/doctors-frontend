@@ -21,9 +21,9 @@ const doctorsSlice = createSlice({
       state.doctors = action.payload;
       state.error = null;
     })
-    .addCase(fetchDoctors.rejected, (state, action) => {
+    .addCase(fetchDoctors.rejected, (state) => {
       state.loading = false;
-      state.error = action.payload; 
+      state.error = null; 
     })
     .addCase(addDoctor.pending, (state) => {
       state.loading = true;
@@ -34,9 +34,9 @@ const doctorsSlice = createSlice({
       state.doctors.push(action.payload); 
       state.error = null
     })
-    .addCase(addDoctor.rejected, (state, action) => {
+    .addCase(addDoctor.rejected, (state) => {
       state.loading = false;
-      state.error = action.payload;
+      state.error = null;
     })
     .addCase(removeDoctor.pending, (state) => {
       state.loading = true;
@@ -47,9 +47,9 @@ const doctorsSlice = createSlice({
       state.doctors = state.doctors.filter((doc)=> doc.id !== action.payload.doctor_id); 
       state.error = null
     })
-    .addCase(removeDoctor.rejected, (state, action) => {
+    .addCase(removeDoctor.rejected, (state) => {
       state.loading = false;
-      state.error = action.payload;
+      state.error = null;
     })
   }
 })
