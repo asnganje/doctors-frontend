@@ -5,7 +5,7 @@ import { addDoctor } from "../redux/thunks/addDoctorThunk"
 import { uploadDoctorImg } from "../services/uploadImg";
 import { updateDoctor } from "../redux/thunks/doctorsThunk";
 
-const DoctorForm = ({doctor, onClose}) => {
+const DoctorForm = ({doctor, setDoc, onClose}) => {
   
   const dispatch = useDispatch()
   const [fileN, setFileN] = useState("")
@@ -62,6 +62,7 @@ const DoctorForm = ({doctor, onClose}) => {
       if(doctor) {
         payload = {...payload, id: doctor.id}
         dispatch(updateDoctor(payload))
+        setDoc(null)
       } else {
         dispatch(addDoctor(payload))
       }

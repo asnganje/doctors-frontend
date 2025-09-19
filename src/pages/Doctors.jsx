@@ -82,6 +82,7 @@ const Doctors = () => {
               </button>
               <DoctorForm
                 doctor={selectedDoc}
+                setDoc = {setSelectedDoc}
                 onClose={()=>setShowForm(false)}
               />
             </div>
