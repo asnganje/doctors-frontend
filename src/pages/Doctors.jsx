@@ -12,7 +12,13 @@ const Doctors = () => {
   const [showForm, setShowForm] = useState(false)
   
   const [successInfo, setSuccessInfo] = useState("")
+
+  const [selectedDoc, setSelectedDoc] = useState(null)
   
+  const displayHandler = (open, doctor=null) => {
+    setShowForm(open)
+    setSelectedDoc(doctor)
+  }
 
   useEffect(()=> {
     if (user) {
@@ -60,7 +66,7 @@ const Doctors = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {
           doctors && doctors.map((doctor)=> (
-            <DoctorDetail key={doctor.id} doctor={doctor}/>
+            <DoctorDetail key={doctor.id} doctor={doctor} onDisplayForm={displayHandler} />
           ))
         }
       </div>
@@ -75,6 +81,7 @@ const Doctors = () => {
                 X
               </button>
               <DoctorForm
+                doctor={selectedDoc}
                 onClose={()=>setShowForm(false)}
               />
             </div>

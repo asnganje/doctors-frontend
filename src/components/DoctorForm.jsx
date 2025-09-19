@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {Upload} from "lucide-react"
 import { useDispatch } from "react-redux";
 import { addDoctor } from "../redux/thunks/addDoctorThunk"
 import { uploadDoctorImg } from "../services/uploadImg";
+import { updateDoctor } from "../redux/thunks/doctorsThunk";
 
-const DoctorForm = ({onClose}) => {
+const DoctorForm = ({doctor, onClose}) => {
+  
   const dispatch = useDispatch()
-    const [fileN, setFileN] = useState("")
+  const [fileN, setFileN] = useState("")
   const [formData, setFormData] = useState({
     name:"",
     specialization:"",
@@ -22,6 +24,16 @@ const DoctorForm = ({onClose}) => {
     "Orthopedics",
     "Psychiatry",
   ]
+  useEffect(()=> {
+    if (doctor) {
+      setFormData({
+        name: doctor.name,
+        specialization: doctor.specialization,
+        biography: doctor.biography,
+        image: doctor.image_url
+      })
+    }
+  }, [doctor])
 
   const changeHandler = (e) => {
     const {name, value, files} = e.target;
@@ -46,8 +58,13 @@ const DoctorForm = ({onClose}) => {
         imageUrl = await uploadDoctorImg(file)
       }
 
-      const payload = {...formData, image_url:imageUrl}
-      dispatch(addDoctor(payload))
+      let payload = {...formData, image_url:imageUrl}
+      if(doctor) {
+        payload = {...payload, id: doctor.id}
+        dispatch(updateDoctor(payload))
+      } else {
+        dispatch(addDoctor(payload))
+      }
     } catch (error) {
       console.error("Image upload filed", error.message)
     }
@@ -56,7 +73,7 @@ const DoctorForm = ({onClose}) => {
   
   return (
     <div>
-      <h3 className="text-lg font-semibold mb-4 text-gray-700">Add a Doctor</h3>
+      <h3 className="text-lg font-semibold mb-4 text-gray-700">{ doctor? "Update Doctor" : "Add a Doctor"}</h3>
       <form className="space-y-4" onSubmit={submitHandler}>
         <input
           type="text"
@@ -124,7 +141,7 @@ const DoctorForm = ({onClose}) => {
             type="submit"
             className="px-4 py-2 cursor-pointer bg-green-500 hover:bg-green-600 text-white rounded-lg"
           >
-            Save Doctor
+            { doctor? "Update": "Save Doctor"}
           </button>
         </div>
       </form>

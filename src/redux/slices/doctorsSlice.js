@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchDoctors, removeDoctor } from "../thunks/doctorsThunk";
+import { fetchDoctors, removeDoctor, updateDoctor } from "../thunks/doctorsThunk";
 import { addDoctor } from "../thunks/addDoctorThunk";
 
 const doctorsSlice = createSlice({
@@ -47,7 +47,22 @@ const doctorsSlice = createSlice({
       state.doctors = state.doctors.filter((doc)=> doc.id !== action.payload.doctor_id); 
       state.error = null
     })
-    .addCase(removeDoctor.rejected, (state) => {
+    .addCase(removeDoctor.rejected, (state) => {     
+      state.loading = false;
+      state.error = null;
+    })
+    .addCase(updateDoctor.pending, (state) => {
+      state.loading = true;
+      state.error = null; 
+    })
+    .addCase(updateDoctor.fulfilled, (state, action) => {
+      state.loading=false 
+      state.doctors = state.doctors.map((doc) =>
+        doc.id === action.payload.id ? action.payload : doc
+      ) 
+      state.error = null
+    })
+    .addCase(updateDoctor.rejected, (state) => {
       state.loading = false;
       state.error = null;
     })

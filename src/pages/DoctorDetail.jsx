@@ -1,8 +1,8 @@
-import { Trash2 } from 'lucide-react'
+import { Trash2, Edit } from 'lucide-react'
 import {useDispatch} from "react-redux"
 import { removeDoctor } from '../redux/thunks/doctorsThunk'
 
-const DoctorDetail = ({doctor}) => {
+const DoctorDetail = ({doctor, onDisplayForm}) => {
   const dispatch = useDispatch()
   const destroyHandler = () => {
     dispatch(removeDoctor(doctor.id))
@@ -22,9 +22,14 @@ const DoctorDetail = ({doctor}) => {
       <h3 className="text-xl font-semibold text-gray-700 text-center">{doctor.name}</h3>
       <p className="text-gray-500 text-center">{doctor.specialization}</p>
       <p className="text-gray-700 mt-2">{doctor.biography}</p>
-      <button onClick={destroyHandler} className="absolute bottom-3 right-2">
-        <Trash2 className="cursor-pointer text-red-400 hover:text-red-500"/>
-      </button>
+      <div className="my-5 border-t-2 border-gray-200">
+        <button onClick={destroyHandler} className="absolute bottom-3 right-2">
+          <Trash2 className="cursor-pointer text-red-400 hover:text-red-500"/>
+        </button>
+        <button onClick={()=>onDisplayForm(true, doctor)} className="absolute bottom-3 left-2">
+          <Edit className="cursor-pointer text-gray-400 hover:text-gray-500"/>
+        </button>
+      </div>
     </div>
   )
 }
