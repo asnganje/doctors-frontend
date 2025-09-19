@@ -13,9 +13,8 @@ const DoctorDetail = ({doctor}) => {
       key={doctor.id}
       className="relative bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition mb-6"
     >
-      {doctor.picture_url && <img 
-      // src={`http://localhost:3000/${doctor.picture_url}`}
-        src={`https://rails-doctors-api-service.onrender.com${doctor.picture_url}`}
+      {doctor.image_url && <img 
+        src={doctor.image_url}
         alt={doctor.name}
         className="w-24 h-24 mx-auto rounded-full object-cover mb-4 border-2 border-amber-400"
       />
