@@ -33,6 +33,11 @@ const Doctors = () => {
   useEffect(()=> {
     dispatch(fetchDoctors())
   }, [dispatch])
+
+  const closeHandler = () => {
+    setShowForm(false)
+    setSelectedDoc(null)
+  }
   
   return(
     <div className="relative max-w-6xl mx-auto mt-5 bg-gray-100 shadow px-4">
@@ -75,7 +80,7 @@ const Doctors = () => {
           <div className="fixed inset-0 bg-gray-400 bg-opacity-40 flex items-center justify-center z-50">
             <div className="relative bg-white rounded-xl shadow-xl w-full max-w-lg p-6">
               <button
-                onClick={()=>setShowForm(false)}
+                onClick={closeHandler}
                 className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 cursor-pointer"
               >
                 X
@@ -83,7 +88,7 @@ const Doctors = () => {
               <DoctorForm
                 doctor={selectedDoc}
                 setDoc = {setSelectedDoc}
-                onClose={()=>setShowForm(false)}
+                onClose={closeHandler}
               />
             </div>
           </div>
