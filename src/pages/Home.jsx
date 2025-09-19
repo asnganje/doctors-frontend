@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import { ArrowRight } from "lucide-react";
-import doctorImg from "../../public/doctor2.jpg"
+import doctorImg from "../assets/doctor2.jpg"
 import { useSelector } from "react-redux";
 
 const Home = () => {
