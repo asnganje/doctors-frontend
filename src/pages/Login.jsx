@@ -35,6 +35,7 @@ const Login = () => {
   
   return(
     <div className="max-w-md mx-auto bg-white p-8 rounded-2xl shadow-lg mt-10">
+      {loading && <div className="bg-green-300 text-sm text-white my-2">Kindly wait a little longer...</div>}
       <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Login</h2>
       <form onSubmit={submitHandler}>
         <FormInput
@@ -66,7 +67,7 @@ const Login = () => {
         <div className="flex items-center justify-center">
           <button
             type="submit"
-            className="w-3/4 bg-amber-400 hover:bg-amber-500 cursor-pointer text-white py-2 rounded-2xl transition"
+            className="w-3/4 bg-amber-400 hover:bg-green-300 cursor-pointer text-white py-2 rounded-2xl transition"
           >
             {loading ? "Logging you in..." : "Login"}
           </button>
