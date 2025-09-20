@@ -69,7 +69,7 @@ const Login = () => {
         <div className="flex items-center justify-center">
           <button
             type="submit"
-            className="w-3/4 bg-green-400 hover:bg-green-300 cursor-pointer text-white py-2 rounded-2xl transition"
+            className="w-3/4 bg-amber-400 hover:bg-amber-300 cursor-pointer text-white py-2 rounded-2xl transition"
           >
             {loading ? "Logging you in..." : "Login"}
           </button>
