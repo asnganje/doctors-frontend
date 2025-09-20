@@ -77,7 +77,7 @@ const Doctors = () => {
       </div>
       {
         showForm && (
-          <div className="fixed inset-0 bg-gray-400/70 flex items-center justify-center z-50">
+          <div className="fixed inset-0 bg-gray-400/70 flex items-center justify-center z-50 px-5">
             <div className="relative bg-white rounded-xl shadow-xl w-full max-w-lg p-6">
               <button
                 onClick={closeHandler}
