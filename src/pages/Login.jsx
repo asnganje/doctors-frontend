@@ -35,12 +35,13 @@ const Login = () => {
   
   return(
     <div className="max-w-md mx-auto bg-white p-8 rounded-2xl shadow-lg mt-10">
-      <div className="bg-green-400 font-bold animate-pulse text-sm p-2 rounded-full text-center text-white my-2">Kindly wait a little longer...</div>
+      {loading && <div className="bg-green-400 font-bold animate-pulse text-sm p-2 rounded-full text-center text-white my-2">Kindly wait a little longer...</div>}
       <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Login</h2>
       <form onSubmit={submitHandler}>
         <FormInput
           label="Email"
           type="email"
+          required
           itemName="email"
           placeholder="Enter your email..."
           autoComplete="email"
@@ -50,6 +51,7 @@ const Login = () => {
         <FormInput
           label="Password"
           type="password"
+          required
           itemName="password"
           placeholder="Enter password"
           autoComplete="new-password"
@@ -67,7 +69,7 @@ const Login = () => {
         <div className="flex items-center justify-center">
           <button
             type="submit"
-            className="w-3/4 bg-amber-400 hover:bg-green-300 cursor-pointer text-white py-2 rounded-2xl transition"
+            className="w-3/4 bg-green-400 hover:bg-green-300 cursor-pointer text-white py-2 rounded-2xl transition"
           >
             {loading ? "Logging you in..." : "Login"}
           </button>
