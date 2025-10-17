@@ -11,9 +11,9 @@ const Signup = () => {
   const [successInfo, setSuccessInfo] = useState("")
   const navigate = useNavigate()  
   const [formState, setFormState] = useState({
+    fullname:"",
     email:"",
-    password:"",
-    password_confirmation:""
+    password:""
   })
   const changeHandler = (e) => {
     const {name, value} = e.target
@@ -29,9 +29,9 @@ const Signup = () => {
     if(user) {
       setSuccessInfo(`Success, redirecting to login...`)
       setFormState({
+        fullname:"",
         email:"",
-        password:"",
-        password_confirmation:""
+        password:""
       })
       const timer = setTimeout(()=> {
         setSuccessInfo("")
@@ -50,6 +50,15 @@ const Signup = () => {
       <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Sign Up</h2>
       <form onSubmit={submitHandler}>
         <FormInput
+          label="Fullname"
+          type="fullname"
+          itemName="fullname"
+          placeholder="Enter your fullname..."
+          autoComplete="fullname"
+          value={formState.fullname}
+          onChange={changeHandler}
+        />
+        <FormInput
           label="Email"
           type="email"
           itemName="email"
@@ -65,16 +74,6 @@ const Signup = () => {
           placeholder="Enter password"
           autoComplete="new-password"
           value={formState.password}
-          onChange={changeHandler}
-        />
-
-        <FormInput
-          label="Confirm password"
-          type="password"
-          itemName="password_confirmation"
-          placeholder="Confirm your password"
-          autoComplete="confirm-password"
-          value={formState.password_confirmation}
           onChange={changeHandler}
         />
         {

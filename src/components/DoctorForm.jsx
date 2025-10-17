@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import {Upload} from "lucide-react"
 import { useDispatch } from "react-redux";
 import { addDoctor } from "../redux/thunks/addDoctorThunk"
-import { uploadDoctorImg } from "../services/uploadImg";
 import { updateDoctor } from "../redux/thunks/doctorsThunk";
 
 const DoctorForm = ({doctor, setDoc, onClose}) => {
@@ -48,19 +47,10 @@ const DoctorForm = ({doctor, setDoc, onClose}) => {
   
   const submitHandler = async (e) => {
     e.preventDefault() 
-    
-    const fileInput = document.getElementById("image-upload")
-    
-    const file = fileInput?.files[0]
     try {
-      let imageUrl = formData.image
-      if (file) {
-        imageUrl = await uploadDoctorImg(file)
-      }
-
-      let payload = {...formData, image_url:imageUrl}
+      let payload = {...formData}
       if(doctor) {
-        payload = {...payload, id: doctor.id}
+        payload = {...payload, _id: doctor._id}                
         dispatch(updateDoctor(payload))
         setDoc(null)
       } else {
