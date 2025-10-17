@@ -5,6 +5,7 @@ import Login from "./pages/Login"
 import Signup from "./pages/Signup"
 import Doctors from "./pages/Doctors"
 import ProtectedRoute from "./components/ProtectedRoute"
+import Error from "./pages/Error"
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
           <Route element={<ProtectedRoute />}>
             <Route path="/doctors" element={<Doctors />}/>
           </Route>
+          <Route path="*" element={<Error />}/>
         </Routes>
       </section>
     </>
