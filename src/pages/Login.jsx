@@ -1,14 +1,13 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import FormInput from "../components/FormInput";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { login } from "../redux/thunks/authThunks";
 import { useDispatch, useSelector } from "react-redux";
 
 const Login = () => { 
   const dispatch = useDispatch()
-  const { user, loading, error} = useSelector((state)=>state.auth)
+  const { accessToken, loading, error} = useSelector((state)=>state.auth)
   
-  const navigate = useNavigate()
   const [formState, setFormState] = useState({
     email:"",
     password:"",
@@ -27,11 +26,9 @@ const Login = () => {
     })
   }
 
-  useEffect(()=> {
-    if (user) {
-      navigate("/doctors")
-    }
-  }, [navigate, user])
+  if (accessToken) {
+    return <Navigate to="/doctors" replace={true}/>
+  }
   
   return(
     <div className="max-w-md mx-auto bg-white p-8 rounded-2xl shadow-lg mt-10">

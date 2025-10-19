@@ -1,13 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { persistReducer, persistStore } from "redux-persist";
-import storage from "redux-persist/lib/storage"; // defaults to localStorage
+import storage from "redux-persist/lib/storage";
 import authReducer from "./slices/authSlice";
 import doctorsReducer from "./slices/doctorsSlice";
 
 const persistConfig = {
   key: "auth",
   storage,
-  whitelist: ["user", "token"],
+  whitelist: ["accessToken", "refreshToken"],
 };
 
 const doctorsPersistConfig = {

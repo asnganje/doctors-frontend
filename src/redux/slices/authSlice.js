@@ -4,9 +4,10 @@ import { login, logout, signUpUser } from "../thunks/authThunks";
 const authSlice = createSlice({
   name:"auth",
   initialState: {
-  user:null,
+  refreshToken:null,
+  accessToken:null,
   loading:null,
-  error:null,
+  error:null
   },
   reducers: {
     resetAuthState: (state)=> {
@@ -21,9 +22,9 @@ const authSlice = createSlice({
       state.loading = true
       state.error = false
     })
-    .addCase(signUpUser.fulfilled, (state, action)=>{
+    .addCase(signUpUser.fulfilled, (state)=>{
       state.loading = false
-      state.user= action.payload
+      state.status= 'success'
       state.error = null
     })
     .addCase(signUpUser.rejected, (state, action)=>{
@@ -37,7 +38,8 @@ const authSlice = createSlice({
     .addCase(login.fulfilled, (state, action) => {
       state.loading = false;
       state.error = false,
-      state.user = action.payload
+      state.refreshToken = action.payload.refreshToken
+      state.accessToken = action.payload.accessToken
     })
     .addCase(login.rejected, (state) => {
       state.loading = false;
@@ -51,7 +53,8 @@ const authSlice = createSlice({
     .addCase(logout.fulfilled, (state) => {
       state.loading = null;
       state.error = null;
-      state.user = null;
+      state.refreshToken = null;
+      state.accessToken = null;
     })
     .addCase(logout.rejected, (state) => {
       state.loading = false;

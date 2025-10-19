@@ -6,15 +6,11 @@ import { logout } from "../redux/thunks/authThunks"
 const Navbar = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { user } = useSelector((state)=> state.auth)
-  let token = ""
-  if (user) {
-    token = user.token
-  }  
+  const { accessToken } = useSelector((state)=> state.auth)
   
   const logoutHandler = async () => {
     try {
-      await dispatch(logout(token)).unwrap()
+      dispatch(logout())
       navigate("/")      
     } catch (error) {
       console.error("Logout failed:", error )
@@ -28,7 +24,7 @@ const Navbar = () => {
       <div className="text-sm md:text-base tracking-tighter">
         The Doctors plaza!
       </div>
-      { user ?
+      { accessToken ?
         <div className="">
           <button type="button" onClick={ logoutHandler } className="bg-amber-400 cursor-pointer p-2 rounded hover:bg-amber-500 text-sm md:text-base text-white md:w-[10vw] text-center">Logout</button>
         </div> 

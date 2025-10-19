@@ -7,7 +7,7 @@ import { signUpUser } from "../redux/thunks/authThunks";
 
 const Signup = () => {
   const dispatch = useDispatch()
-  const {loading, error, user } = useSelector((state)=>state.auth)
+  const {loading, error, status } = useSelector((state)=>state.auth)
   const [successInfo, setSuccessInfo] = useState("")
   const navigate = useNavigate()  
   const [formState, setFormState] = useState({
@@ -26,7 +26,7 @@ const Signup = () => {
   }
 
   useEffect(()=> {
-    if(user) {
+    if(status === 'success') {
       setSuccessInfo(`Success, redirecting to login...`)
       setFormState({
         fullname:"",
@@ -40,7 +40,7 @@ const Signup = () => {
       }, 4000)
       return () => clearTimeout(timer)
     }
-  }, [user, dispatch, navigate])
+  }, [status, dispatch, navigate])
   
   return(
     <div className="max-w-md mx-auto bg-white p-8 rounded-2xl shadow-lg mt-10">
