@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchDoctors } from "../redux/thunks/doctorsThunk";
 import DoctorDetail from "./DoctorDetail";
 import DoctorForm from "../components/DoctorForm";
+import ChatBar from "../components/CharBar";
 
 const Doctors = () => {
   const {user} = useSelector((state)=>state.auth)
@@ -40,7 +41,7 @@ const Doctors = () => {
   }
   
   return(
-    <div className="relative max-w-6xl mx-auto mt-5 bg-gray-100 shadow px-4">
+    <div className="relative max-w-6xl mx-auto mt-5 bg-gray-100 shadow px-4 pb-5">
       {successInfo && <div
         className="absolute bottom-[-10] right-5 mb-4 italic px-2 rounded-lg text-center py-2 bg-green-100 text-green-700 text-sm font-medium shadow-sm animate-pulse"
       >{successInfo}</div>}
@@ -94,6 +95,7 @@ const Doctors = () => {
           </div>
         )
       }
+      <ChatBar />
     </div>
   )
 }
