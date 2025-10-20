@@ -46,7 +46,7 @@ const ChatBar = () => {
               <button
                 type="button"
                 onClick={clearHandler}
-                className="bg-gray-200 cursor-pointer p-1 text-sm rounded tracking-wider"
+                className="bg-gray-200 hover:bg-gray-500 hover:text-white cursor-pointer p-1 text-sm rounded tracking-wider"
               >
                 Clear
               </button>
