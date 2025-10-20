@@ -3,6 +3,7 @@ import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import authReducer from "./slices/authSlice";
 import doctorsReducer from "./slices/doctorsSlice";
+import aiReducer from "./slices/aiSlice";
 
 const persistConfig = {
   key: "auth",
@@ -21,7 +22,8 @@ const persistedDoctorsReducer = persistReducer(doctorsPersistConfig, doctorsRedu
 export const store = configureStore({
   reducer: {
     auth: persistedAuthReducer,
-    doctors: persistedDoctorsReducer
+    doctors: persistedDoctorsReducer,
+    ai: aiReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
