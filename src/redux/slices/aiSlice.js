@@ -11,6 +11,7 @@ const aiSlice = createSlice({
   reducers: {
     clearResponse: (state) => {
       state.response = ""
+      state.error = null;
     }
   },
   extraReducers: (builder) => {
@@ -20,8 +21,8 @@ const aiSlice = createSlice({
       state.error=null
     })
     .addCase(fetchAIResponse.fulfilled, (state, action) => {
-      state.loading = false;
-      state.response = action.payload;
+      state.loading = false;      
+      state.response = action.payload.reply;
       state.error = false
     })
     .addCase(fetchAIResponse.rejected, (state, action)=> {
