@@ -4,7 +4,7 @@ import doctorImg from "../assets/doctor2.jpg"
 import { useSelector } from "react-redux";
 
 const Home = () => {
-  const {user} = useSelector((state)=> state.auth)
+  const { accessToken } = useSelector((state)=> state.auth)
   return(
     <div className="flex flex-col justify-center py-10">
       <h1 className="text-3xl md:text-4xl font-bold text-gray-700 text-center mb-10">
@@ -17,7 +17,7 @@ const Home = () => {
             and manage doctor records seamlessly.
           </p>
           <div className="flex flex-col md:flex-row gap-10 justify-between">
-            {!user && <Link to="/Signup" className="flex items-center justify-center bg-amber-400 hover:bg-amber-500 hover:ml-2 p-2 rounded cursor-pointer text-white">Get started <ArrowRight /></Link>}
+            {!accessToken && <Link to="/Signup" className="flex items-center justify-center bg-amber-400 hover:bg-amber-500 hover:ml-2 p-2 rounded cursor-pointer text-white">Get started <ArrowRight /></Link>}
             <Link to="/doctors" className="flex items-center justify-center bg-amber-400 hover:bg-amber-500 hover:mr-2 p-2 rounded cursor-pointer text-white">Doctors List <ArrowRight /></Link>
           </div>
         </div>

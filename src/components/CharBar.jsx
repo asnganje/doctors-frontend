@@ -41,7 +41,7 @@ const ChatBar = () => {
         {
           (response || error) && (
             <div className="">
-              {response && <p><strong>AI:</strong>{response}</p>}
+              {response && <p><strong></strong>{response}</p>}
               {error && <p className="text-red-400">{error}</p>}
               <button
                 type="button"
