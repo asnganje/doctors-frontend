@@ -1,7 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/v1/ai"
+// const API_URL = "http://localhost:5000/api/v1/ai"
+const API_URL = "https://doctors-api-expressjs.onrender.com/api/v1/ai"
 
 export const fetchAIResponse = createAsyncThunk('ai/fetchAIResponse',
   async (message, {rejectWithValue}) => {
@@ -10,7 +11,8 @@ export const fetchAIResponse = createAsyncThunk('ai/fetchAIResponse',
         {message},
         {withCredentials: true}
       )
-      return response.data.response
+      
+      return response.data
     } catch (error) {
       return rejectWithValue(error.response?.data || "Error fetching AI Response")
     }
