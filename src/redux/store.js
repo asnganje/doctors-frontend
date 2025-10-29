@@ -8,7 +8,7 @@ import aiReducer from "./slices/aiSlice";
 const persistConfig = {
   key: "auth",
   storage,
-  whitelist: ["accessToken", "refreshToken"],
+  whitelist: ["accessToken", "railsToken"],
 };
 
 const doctorsPersistConfig = {

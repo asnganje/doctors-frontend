@@ -5,6 +5,7 @@ const authSlice = createSlice({
   name:"auth",
   initialState: {
   refreshToken:null,
+  railsToken: null,
   accessToken:null,
   loading:null,
   error:null
@@ -38,8 +39,8 @@ const authSlice = createSlice({
     .addCase(login.fulfilled, (state, action) => {
       state.loading = false;
       state.error = false,
-      state.refreshToken = action.payload.refreshToken
       state.accessToken = action.payload.accessToken
+      state.railsToken = action.payload.token      
     })
     .addCase(login.rejected, (state) => {
       state.loading = false;
@@ -53,7 +54,7 @@ const authSlice = createSlice({
     .addCase(logout.fulfilled, (state) => {
       state.loading = null;
       state.error = null;
-      state.refreshToken = null;
+      state.railsToken = null;
       state.accessToken = null;
     })
     .addCase(logout.rejected, (state) => {

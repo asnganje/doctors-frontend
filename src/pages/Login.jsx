@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Login = () => { 
   const dispatch = useDispatch()
-  const { accessToken, loading, error} = useSelector((state)=>state.auth)
+  const { accessToken, railsToken, loading, error} = useSelector((state)=>state.auth)
   
   const [formState, setFormState] = useState({
     email:"",
@@ -26,7 +26,7 @@ const Login = () => {
     })
   }
 
-  if (accessToken) {
+  if (accessToken || railsToken) {
     return <Navigate to="/doctors" replace={true}/>
   }
   
