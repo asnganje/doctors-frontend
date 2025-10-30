@@ -8,8 +8,11 @@ const API_URL = "http://localhost:3000/api/v1/ai_chat"
 export const fetchAIResponse = createAsyncThunk('ai/fetchAIResponse',
   async (message, {rejectWithValue}) => {
     try {
-      const response = await axios.post(`${API_URL}/chat`,
-        {message},
+      const response = await axios.post(`${API_URL}`,
+        {prompt: message},
+      // express
+      // const response = await axios.post(`${API_URL}/chat`,
+        // {message},
         {withCredentials: true}
       )
       // rails
