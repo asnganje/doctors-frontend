@@ -3,19 +3,19 @@ import {useDispatch} from "react-redux"
 import { removeDoctor } from '../redux/thunks/doctorsThunk'
 
 const DoctorDetail = ({doctor, onDisplayForm}) => {
-  
+  const docId = doctor.id || doctor._id
   const dispatch = useDispatch()
   const destroyHandler = () => {   
-    dispatch(removeDoctor(doctor._id))
+    dispatch(removeDoctor(docId))
   }
   
   return(
     <div
-      key={doctor._id}
+      key={docId}
       className="relative bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition mb-6"
     >
-      {doctor.picture && <img 
-        src={doctor.picture}
+      {(doctor.picture || doctor.image_url) && <img 
+        src={doctor.picture || doctor.image_url}
         alt={doctor.name}
         className="w-24 h-24 mx-auto rounded-full object-cover mb-4 border-2 border-amber-400"
       />

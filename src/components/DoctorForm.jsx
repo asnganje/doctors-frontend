@@ -50,7 +50,7 @@ const DoctorForm = ({doctor, setDoc, onClose}) => {
     try {
       let payload = {...formData}
       if(doctor) {
-        payload = {...payload, _id: doctor._id}                
+        payload = {...payload, _id: doctor._id, id:doctor.id}                
         dispatch(updateDoctor(payload))
         setDoc(null)
       } else {

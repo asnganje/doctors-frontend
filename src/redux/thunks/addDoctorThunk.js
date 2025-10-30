@@ -24,8 +24,11 @@ const addDoctor = createAsyncThunk("doctors/addDoctor",
         headers: {
           "Content-Type":"multipart/form-data"
         }
-      })      
-      return response.data.data;
+      })
+      // RAILS
+      return response.data
+      // EXPRESS
+      // return response.data.data;
     } catch (error) {
       return rejectWithValue(error.response?.data || "Failed to add Doctor")
     }

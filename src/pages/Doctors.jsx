@@ -72,7 +72,7 @@ const Doctors = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {
           doctors && doctors?.map((doctor)=> (
-            <DoctorDetail key={doctor._id || Math.random()} doctor={doctor} onDisplayForm={displayHandler} />
+            <DoctorDetail key={doctor?._id || Math.random()} doctor={doctor} onDisplayForm={displayHandler} />
           ))
         }
       </div>

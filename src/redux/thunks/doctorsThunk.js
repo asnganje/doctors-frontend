@@ -43,16 +43,17 @@ const updateDoctor = createAsyncThunk("doctors/updateDoctor",
       if (doctorData.image) {
         formData.append("image", doctorData.image)
       }
-      const response = await axios.patch(`${API_URL}/${doctorData._id}`, formData, {
+      const id = doctorData._id || doctorData.id
+      const response = await axios.patch(`${API_URL}/${id}`, formData, {
         withCredentials: true,
         headers: {
           "Content-Type":"multipart/form-data"
         }
       })
       // rails
-        
+        return response.data        
       // express
-      return response.data.data
+      // return response.data.data
     } catch (error) {
       return rejectWithValue(error.response?.data?.error || error.message)
     }
