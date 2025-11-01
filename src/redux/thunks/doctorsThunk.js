@@ -2,9 +2,10 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 // const API_URL = "http://localhost:5000/api/v1/doctors"
-const API_URL = "http://localhost:3000/api/v1/doctors"
 // const API_URL = "https://doctors-api-expressjs.onrender.com/api/v1/doctors"
-// const API_URL = "https://rails-doctors-api-service.onrender.com/api/v1/doctors"
+
+// const API_URL = "http://localhost:3000/api/v1/doctors"
+const API_URL = "https://rails-doctors-api-service.onrender.com/api/v1/doctors"
 
 const fetchDoctors = createAsyncThunk("doctors/fetchDoctors", 
   async(_, {rejectWithValue}) => {
