@@ -5,8 +5,8 @@ import { toast } from "react-toastify"
 // const API_URL = "https://doctors-api-expressjs.onrender.com/api/v1/auth"
 
 // const API_URL = "http://localhost:3000/api/v1/users"
-const API_URL = "https://rails-doctors-api-service.onrender.com/api/v1/users"
-
+// const API_URL = "https://rails-doctors-api-service.onrender.com/api/v1/users"
+const API_URL = "https://doctorsapiapp-production.up.railway.app/api/v1/users"
 
 const signUpUser = createAsyncThunk("auth/signUpUser",
   async (userData, {rejectWithValue}) => {
