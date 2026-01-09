@@ -14,12 +14,7 @@ const signUpUser = createAsyncThunk("auth/signUpUser",
       // rails
       const response = await axios.post(`${API_URL}`, {
         user: {...userData}
-      })
-      // express
-      // const response = await axios.post(`${API_URL}/register`, {
-      //   ...userData
-      // })
-      
+      })      
       return response.data
     } catch (error) {
       return rejectWithValue(error.response.data.errors || ["Sign Up Failed"])
